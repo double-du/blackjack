@@ -1,0 +1,19 @@
+.gameover{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    transition: left ease .25s, top ease .25s;
+
+    /* left: -100vw; */
+    top: -50vh;
+}
+
+.gameover--active{
+    left: 0;
+    top: 10vh;
+}

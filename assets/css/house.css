@@ -1,0 +1,9 @@
+.house{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.house > *{
+    width: 33%;
+}

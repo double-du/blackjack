@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Criação de API</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/title.css">
+    <link rel="stylesheet" href="assets/css/subtitle.css">
+    <link rel="stylesheet" href="assets/css/table.css">
+    <link rel="stylesheet" href="assets/css/house.css">
+    <link rel="stylesheet" href="assets/css/house-deck.css">
+    <link rel="stylesheet" href="assets/css/house-deck-change.css">
+    <link rel="stylesheet" href="assets/css/player.css">
+    <link rel="stylesheet" href="assets/css/card.css">
+    <link rel="stylesheet" href="assets/css/hand.css">
+    <link rel="stylesheet" href="assets/css/about.css">
+    <link rel="stylesheet" href="assets/css/gameover.css">
+    <link rel="stylesheet" href="assets/css/gameover-container.css">
+    <link rel="stylesheet" href="assets/css/about.css">
+    <link rel="stylesheet" href="assets/css/about.css">
+    <link rel="stylesheet" href="assets/css/scoreboard.css">
+    <link rel="stylesheet" href="assets/css/scoreboard-score.css">
+    <link rel="stylesheet" href="assets/css/button-play.css">
+</head>
+<body>
+    <h1 class="title">Comunicação com API</h1>
+    <div class="table">
+        <h2 class="subtitle">BlackJack</h2>
+        <div class="house">
+            <div class="hand house__hand">
+            </div>
+            <div class="scoreboard house__points">
+                Pontos da Casa: 
+                <span class="house__points_marker scoreboard__score">-</span>
+            </div>
+            <div class="house__deck">
+                Estamos usando o baralho: 
+                <span class="house__deck_id">-</span>
+                <a href="" class="house__deck_change house__deck_change--disabled">Recomeçar?</a>
+            </div>
+        </div>
+        <a class="button_play">Iniciar</a>
+        <div class="player">
+            <div class="hand player__hand">
+            </div>
+            <div class="scoreboard player__points">
+                Pontuação:
+                <span class="player__points_counter scoreboard__score">-</span>
+            </div>
+        </div>
+    </div>
+    <div class="gameover">
+        <div class="gameover__container">
+            <h3 class="subtitle gameover__text"></h3>
+            <a class="gameover__reset">Jogar novamente</a>
+        </div>
+    </div>
+    <div class="about">
+        <h2 class="subtitle">
+            Como Jogar
+        </h2>
+        <p>BlackJack (ou 21 no Brasil) é um clássico jogo de cartas.</p>
+        <p>Para ganhar é bem simples, basta fazer mais pontos que a casa.</p>
+        <p>A casa sempre para de jogar com 5 cartas OU 17 pontos</p>
+        <p>Rei, Rainha e Valete valem 10 pontos. Ás vale 1. As demais cartas valem o mesmo que o número representado.</p>
+    </div>
+    <script src="assets/js/deck.js"></script>
+</body>
+</html>

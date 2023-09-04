@@ -1,6 +1,7 @@
 # Projeto de Integração com API
 
 Projeto desenvolvido para demonstrar a capacidade de integração com APIs.
+
 Desenvolvido por Eduardo Augusto Furlaneti.
 
 ## Instalação

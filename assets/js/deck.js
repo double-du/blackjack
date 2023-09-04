@@ -5,9 +5,10 @@ const houseScoreboard = document.querySelector('.house__points_marker');
 const playerScoreboard = document.querySelector('.player__points_counter');
 const mainURL = 'https://deckofcardsapi.com/api/deck/';
 const gameoverPanel = document.querySelector('.gameover');
+const mainButton = document.querySelector('.button_play');
+const recomecar = document.querySelector('.house__deck_change');
 let playerPoints = 0;
 let housePoints = 0;
-let mainButton = document.querySelector('.button_play');
 let gameOn = false;
 
 mainButton.addEventListener('click', async (e) => {
@@ -20,16 +21,17 @@ mainButton.addEventListener('click', async (e) => {
         }
         await startsGame();
         mainButton.innerHTML = 'Comprar Carta';
-        await buyCard('both',2);
+        await buyCard('both', 2);
+        recomecar.classList.remove('house__deck_change--disabled');
         return;
     }
 
     if(deck != ''){
         if(cardsOfTheHouse() <= 5 && housePoints <= 17){
-            await buyCard('both',2);
+            await buyCard('both', 2);
             return;
         }
-        await buyCard('player',2);
+        await buyCard('player',1);
         return;
     }
     
@@ -73,14 +75,18 @@ async function buyCard(forWho, howMuch) {
     
     switch (forWho){
         case 'both':
-            addCard('house', card.cards[0].value, card.cards[0].image);
-            addCard('player', card.cards[1].value, card.cards[1].image);
+            if(gameOn)
+                addCard('player', card.cards[1].value, card.cards[1].image);
+            if(gameOn)
+                addCard('house', card.cards[0].value, card.cards[0].image);
             break;
         case 'player':
-            addCard('player', card.cards[0].value, card.cards[0].image);
+            if(gameOn)
+                addCard('player', card.cards[0].value, card.cards[0].image);
             break;
         case 'house':
-            addCard('house', card.cards[0].value, card.cards[0].image);
+            if(gameOn)
+                addCard('house', card.cards[0].value, card.cards[0].image);
             break;
     }
 }
@@ -92,6 +98,7 @@ async function addCard(forWho, card, cardImage) {
     cardElement.style.backgroundImage = `url(${cardImage})`;
     await updatePoints(forWho, card);
     hand.appendChild(cardElement);
+    checkScore();
 }
 
 async function updatePoints(forWho, card){
@@ -109,15 +116,16 @@ async function updatePoints(forWho, card){
             break;
     }
     
-    if(forWho === 'house'){
-        housePoints += points;
-        houseScoreboard.innerHTML = housePoints;
-        checkScore();
-        return;
-    }
     if(forWho === 'player'){
         playerPoints += points;
         playerScoreboard.innerHTML = playerPoints;
+        checkScore();
+        return;
+    }
+
+    if(forWho === 'house'){
+        housePoints += points;
+        houseScoreboard.innerHTML = housePoints;
         checkScore();
         return;
     }
@@ -132,9 +140,50 @@ function checkScore(){
     if(playerPoints > 21){
         gameoverPanel.classList.add('gameover--active');
         gameoverPanel.querySelector('.gameover__text').innerHTML = 'A Casa ganhou...';
+        gameOn = false;
     }
     if(housePoints > 21 || playerPoints == 21){
         gameoverPanel.classList.add('gameover--active');
         gameoverPanel.querySelector('.gameover__text').innerHTML = 'Parabéns! Você venceu!';
+        gameOn = false;
     }
 }
+
+function countPoints() {
+    if(playerPoints > housePoints){
+        gameoverPanel.classList.add('gameover--active');
+        gameoverPanel.querySelector('.gameover__text').innerHTML = 'Parabéns! Você venceu!';
+    }
+    if(playerPoints < housePoints){
+        gameoverPanel.classList.add('gameover--active');
+        gameoverPanel.querySelector('.gameover__text').innerHTML = 'A Casa ganhou...';
+    }
+}
+
+function restartGame(){
+    deck = '';
+    playerPoints = 0;
+    housePoints = 0;
+    gameOn = false;
+    gameoverPanel.classList.remove('gameover--active');
+    spanDeck.innerHTML = '';
+    gameoverPanel.querySelector('.gameover__text').innerHTML = '';
+    houseScoreboard.innerHTML = housePoints;
+    playerScoreboard.innerHTML = playerPoints;
+    mainButton.innerHTML = 'Iniciar';
+    recomecar.classList.add('house__deck_change--disabled');
+    document.querySelector('.player__hand').innerHTML = '';
+    document.querySelector('.house__hand').innerHTML = '';
+}
+
+document.querySelector('.house__deck_change').addEventListener('click', () => {
+    restartGame();
+});
+
+document.querySelector('.gameover__reset').addEventListener('click', () => {
+    restartGame();
+});
+
+document.querySelector('.stop_game').addEventListener('click', () => {
+    countPoints();
+});

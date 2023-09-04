@@ -8,9 +8,8 @@
     height: 100vh;
     overflow: hidden;
     transition: left ease .25s, top ease .25s;
+    top: -100vh;
 
-    /* left: -100vw; */
-    top: -50vh;
 }
 
 .gameover--active{

@@ -1,9 +1,14 @@
 .house{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     width: 100%;
 }
-.house > *{
-    width: 33%;
+@media screen and (min-width: 998px) {
+    .house{
+        flex-direction: row;
+    }
+    .house > *{
+        width: 33%;
+    }
 }
